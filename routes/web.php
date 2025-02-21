@@ -32,6 +32,7 @@ Route::delete('/events/{event}/cancel', [EventController::class, 'cancelInscript
     // Rotas de eventos para administradores
     Route::middleware('admin')->group(function () {
         Route::resource('events', EventController::class)->except(['index']); // CRUD de eventos (exceto index)
+        Route::get('/events/{event}/participants', [EventController::class, 'showParticipants'])->name('events.participants');
     });
 });
 

@@ -69,10 +69,15 @@ class EventController extends Controller
     // Deletar um evento
     public function destroy(Event $event)
     {
+        // Cancelar todas as inscrições antes de excluir o evento
+        $event->inscriptions()->delete();
+
+        // Excluir o evento
         $event->delete();
 
-        return redirect()->route('events.index')->with('success', 'Evento excluído com sucesso!');
+        return redirect()->route('events.index')->with('success', 'Evento e suas inscrições excluídos com sucesso!');
     }
+
 
     // Inscrever um participante no evento
     public function inscribe(Event $event)
@@ -86,7 +91,7 @@ class EventController extends Controller
             return redirect()->route('events.index')->with('success', 'Inscrição realizada com sucesso!');
         }
 
-        return redirect()->route('events.index')->with('error', 'Não foi possível realizar a inscrição. Verifique a disponibilidade.');
+        return redirect()->route('events.index')->with('success', 'Não foi possível realizar a inscrição. Verifique a disponibilidade.');
     }
 
     // Cancelar inscrição
@@ -96,6 +101,12 @@ class EventController extends Controller
 
         return redirect()->route('events.index')->with('success', 'Inscrição cancelada!');
     }
+    
+    public function showParticipants(Event $event)
+    {
+        $participants = $event->participants()->with('user')->get();
 
+        return view('events.participants', compact('event', 'participants'));
+    }
 
 }

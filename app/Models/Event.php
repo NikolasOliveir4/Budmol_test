@@ -14,6 +14,12 @@ class Event extends Model
         return $this->hasMany(EventParticipation::class);
     }
 
+    public function participants()
+    {
+        return $this->hasMany(EventParticipation::class);
+    }
+
+
     protected $fillable = [
         'title',
         'description',

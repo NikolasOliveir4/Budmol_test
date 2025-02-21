@@ -1,66 +1,126 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Event Manager - Laravel Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este é um projeto de gerenciamento de eventos desenvolvido com **Laravel**. O sistema permite a criação, edição, listagem e exclusão de eventos, além da inscrição e cancelamento de participantes para os eventos.
 
-## About Laravel
+## Pré-requisitos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Antes de rodar o projeto, verifique se você tem as seguintes dependências instaladas:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **PHP** (preferencialmente versão 8.0 ou superior)
+- **Composer** (gerenciador de dependências PHP)
+- **MySQL** ou outro banco de dados relacional compatível
+- **Node.js** e **npm** (para compilar assets front-end, se necessário)
+- **Laravel** (não precisa ser instalado globalmente, apenas via Composer)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Se você estiver utilizando o **Docker**, também pode configurar o ambiente facilmente utilizando o `docker-compose`.
 
-## Learning Laravel
+## Instalação
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Passo 1: Clonar o repositório
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Clone o repositório do projeto para sua máquina local.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+git clone https://github.com/usuario/event-manager.git
+cd event-manager
+Passo 2: Instalar dependências do PHP
 
-## Laravel Sponsors
+Execute o comando abaixo para instalar as dependências do Laravel usando o Composer.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+bash
+Copy
+composer install
+Passo 3: Configurar o arquivo .env
 
-### Premium Partners
+Copie o arquivo .env.example para .env para configurar o ambiente do seu projeto.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+bash
+Copy
+cp .env.example .env
+Agora, edite o arquivo .env com as credenciais do seu banco de dados e outras variáveis de ambiente necessárias, como APP_KEY, DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME e DB_PASSWORD.
 
-## Contributing
+Passo 4: Gerar a chave da aplicação
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Execute o seguinte comando para gerar a chave da aplicação do Laravel:
 
-## Code of Conduct
+bash
+Copy
+php artisan key:generate
+Passo 5: Rodar as migrações do banco de dados
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+O projeto possui migrações para criar as tabelas necessárias no banco de dados. Execute o comando abaixo para rodá-las:
 
-## Security Vulnerabilities
+bash
+Copy
+php artisan migrate
+Passo 6: Instalar dependências de front-end (opcional)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Se você quiser compilar os assets front-end, execute os comandos abaixo:
 
-## License
+bash
+Copy
+npm install
+npm run dev
+Passo 7: Rodar o servidor
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Agora você pode rodar o servidor local do Laravel com o comando:
+
+bash
+Copy
+php artisan serve
+O servidor estará disponível em http://localhost:8000.
+
+Estrutura de Rotas
+
+Rota de Listagem de Eventos
+URL: /events
+Método: GET
+Descrição: Exibe todos os eventos registrados no sistema. Permite que o administrador veja as opções de editar e excluir eventos. Usuários podem se inscrever nos eventos.
+Rota de Criação de Evento
+URL: /events/create
+Método: GET
+Descrição: Exibe o formulário para criação de um novo evento. Apenas administradores podem acessar essa página.
+Rota para Salvar Evento
+URL: /events
+Método: POST
+Descrição: Salva um novo evento no banco de dados.
+Rota de Edição de Evento
+URL: /events/{id}/edit
+Método: GET
+Descrição: Exibe o formulário de edição de um evento existente. Apenas administradores podem acessar essa página.
+Rota para Atualizar Evento
+URL: /events/{id}
+Método: PUT
+Descrição: Atualiza os dados do evento no banco de dados.
+Rota de Exclusão de Evento
+URL: /events/{id}
+Método: DELETE
+Descrição: Exclui um evento e cancela as inscrições associadas. Apenas administradores podem excluir eventos.
+Rota de Inscrição em Evento
+URL: /events/{id}/inscribe
+Método: POST
+Descrição: Permite que um usuário se inscreva em um evento, caso o evento esteja aberto e tenha vagas disponíveis.
+Rota de Cancelamento de Inscrição
+URL: /events/{id}/cancelInscription
+Método: DELETE
+Descrição: Permite que um usuário cancele sua inscrição em um evento.
+Rota de Visualização de Inscritos
+URL: /events/{id}/participants
+Método: GET
+Descrição: Exibe a lista de participantes inscritos em um evento. Apenas administradores podem visualizar a lista de inscritos.
+Autenticação e Autorização
+
+Usuários Admin: Podem criar, editar, excluir eventos, e visualizar a lista de inscritos.
+Usuários Participantes: Podem se inscrever e cancelar inscrições em eventos.
+Roles e Permissões
+
+Os usuários têm o papel de admin ou participant. O papel do usuário é armazenado no campo role da tabela users. O admin tem permissões para gerenciar eventos, enquanto o participant pode apenas se inscrever e cancelar inscrições.
+
+Como Funciona o Sistema
+
+Criação de Eventos: Administradores podem criar eventos, definindo título, descrição, data de início e término, capacidade e status.
+Inscrição e Cancelamento de Inscrição: Usuários podem se inscrever em eventos com vagas disponíveis. Eles também podem cancelar a inscrição, caso necessário.
+Exclusão de Eventos: Ao excluir um evento, todas as inscrições associadas ao evento são canceladas automaticamente.
+Conclusão
+
+Agora que você configurou e iniciou o projeto, você pode acessar a página principal do Event Manager e começar a gerenciar eventos, inscrever-se em eventos, e aproveitar todas as funcionalidades do sistema!
