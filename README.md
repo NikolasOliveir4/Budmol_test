@@ -21,8 +21,8 @@ Se você estiver utilizando o **Docker**, também pode configurar o ambiente fac
 Clone o repositório do projeto para sua máquina local.
 
 ```bash
-git clone https://github.com/usuario/event-manager.git
-cd event-manager
+git clone https://github.com/NikolasOliveir4/Budmol_test.git
+cd budmol_test
 Passo 2: Instalar dependências do PHP
 
 Execute o comando abaixo para instalar as dependências do Laravel usando o Composer.
